@@ -43,7 +43,7 @@ exports.index = function(req, res) {
   else {
 	condicion_busqueda="%"
   }
-  models.Quiz.findAll({where:["pregunta like ? ",condicion_busqueda]}).then(function(quizes) {
+  models.Quiz.findAll({where:["pregunta like ? ",condicion_busqueda],order:'pregunta ASC'}).then(function(quizes) {
     res.render('quizes/index.ejs', {quizes: quizes});
   }
  ).catch(function(error) {next(error);})
