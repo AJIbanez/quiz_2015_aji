@@ -93,7 +93,7 @@ exports.create=function(req,res) {
 	     res.render('quizes/new',{quiz: quiz, errors:  err.errors});
           } else {
 		quiz //quiz guarda en DB los campos pregunta y respuesta de quiz
-   		.save({fields:["pregunta","respuesta"]})
+   		.save({fields:["pregunta","respuesta","indicetematico"]})
 		.then(function() {
       		res.redirect('/quizes')})
            }  // res.redirect: redirección HTTP a lista de de preguntas
@@ -112,6 +112,7 @@ exports.destroy=function(req,res) {
 exports.update=function(req,res) {
    req.quiz.pregunta = req.body.quiz.pregunta;
    req.quiz.respuesta = req.body.quiz.respuesta;
+   req.quiz.indicetematico = req.body.quiz.indicetematico;
 
    req.quiz
    .validate()
@@ -121,7 +122,7 @@ exports.update=function(req,res) {
 	     res.render('quizes/edit',{quiz: quiz, errors:  err.errors});
           } else {
 		req.quiz //save: guarda campos pregunta y respuesta en DB
-   		.save({fields:["pregunta","respuesta"]})
+   		.save({fields:["pregunta","respuesta","indicetematico"]})
 		.then(function() {
       		res.redirect('/quizes');});
            }  // res.redirect: redirección HTTP a lista de de preguntas (URL relativo)
@@ -138,5 +139,5 @@ exports.edit = function(req, res) {
 	
 //Get /author
 exports.author = function(req,res) {
-	res.render('author');
+	res.render('author',{errors:[]});
 };
