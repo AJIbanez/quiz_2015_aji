@@ -2,4 +2,6 @@
 node_modules
 npm-debug.log
 quiz.sqlite
+quiz.sqlite_old
+quiz.sqlite_13072015
 .env
