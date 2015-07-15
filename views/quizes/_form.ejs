@@ -4,10 +4,9 @@
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <p>
 <label for="indicetematico" class="rem">Tema:</label>
 <select id="selectTema" name="quiz[indicetematico]">
-  <% var temas=["otro","humanidades","ocio","ciencia","tecnología"];
+  <% var temas=['otro',"humanidades","ocio","ciencia","tecnología"];
      for (var i in temas) { %>
-  <option value ="<%= temas[i] %>"><%= temas[i] %><option>
-  <% } %>
+  <option value ="<%= temas[i] %>"><%= temas[i] %></option><% } %>
 </select>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar"/> <p> 

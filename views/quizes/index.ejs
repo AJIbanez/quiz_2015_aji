@@ -1,9 +1,11 @@
-<form method="get" action="/quizes">
   <table>	
 	<% var i; for (i=0; i < quizes.length; i++) { %>
 	<tr>
+	  <form method="get" action="/quizes">
           <td><a href="quizes/<%=quizes[i].id %>"><%= quizes[i].pregunta %> (<%= quizes[i].indicetematico %>)</a></td>
+	  <%if(session.user){%>
 	  <td><a href="quizes/<%=quizes[i].id %>/edit"><button type="button">editar</button></a></td>
+	  </form>
 	  <td>
 		<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
 		  <button type="summit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
@@ -11,6 +13,7 @@
 		  </button>
  		</form>
 	  </td>
+	  <% }%>
         </tr>
 	<% }%>
 	<form method="get" action="/quizes">
@@ -18,10 +21,14 @@
   	     <input type="text" name="search" value="texto_a_buscar_en_preguntas"/>
   	     <input type="submit" value="Enviar"></p></td>
  	</tr>
+	</form>
+	<%if(session.user){%>
 	<form method="get" action="/quizes">
 	<tr> 
 	   <td> <a href="/quizes/new"><button type="button">Crear pregunta</button></a> </td>
         </tr>
+	</form>
+	<% }%>
   </table>
   
 
