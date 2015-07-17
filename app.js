@@ -8,6 +8,7 @@ var partials = require('express-partials');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var routes = require('./routes/index');
+var autologout =require('./autologout/index');
 var app = express();
 
 
@@ -39,6 +40,7 @@ app.use(function(req,res,next) {
 	res.locals.session = req.session;
 	next();
 });
+app.use(autologout());
 app.use('/', routes);
 
 // catch 404 and forward to error handler

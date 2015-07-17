@@ -144,3 +144,35 @@ exports.edit = function(req, res) {
 exports.author = function(req,res) {
 	res.render('author',{errors:[]});
 };
+
+//GET /quizes/statistics
+exports.statistics = function(req, res) {
+ 
+ models.Quiz.findAll({include: [models.Comment]}).then(
+  function(quiz){
+	  if (quiz) {
+		  
+		   var numeroComentarios=0;
+		   var mediaComentarios = 0;
+		   var sinComentarios=0;
+		   var conComentarios=0;
+		   var aux = 0;
+		   
+		   for (var i=0; i < quiz.length; i++) {
+		     aux = quiz[i].Comments.length;
+		     if (aux > 0) {
+		        conComentarios++;
+			numeroComentarios += aux;
+		     }
+		   }
+		   if (quiz.length > 0) { 
+		   	mediaComentarios = numeroComentarios/quiz.length;
+		   }
+		   sinComentarios = quiz.length - conComentarios; 
+		   res.render('quizes/statistics.ejs',
+			   {lonQuiz: quiz.length, nCom:numeroComentarios, mediaCom:mediaComentarios,
+				 sinCom:sinComentarios, conCom:conComentarios, errors: []})
+	}
+ }); 
+};
+
